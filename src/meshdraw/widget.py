@@ -1092,8 +1092,12 @@ class View3DWidget(QWidget):
                 cost += int(ov["_edges"].n_cells)
         return cost
 
+    def fast_interaction_cost(self) -> int:
+        """The scene cost above which a moving camera draws the cheaper frame (``style.FAST_INTERACTION_COST``)."""
+        return FAST_INTERACTION_COST
+
     def _on_interaction_start(self) -> None:
-        if self.plotter is None or self._fast is not None or self.scene_cost() < FAST_INTERACTION_COST:
+        if self.plotter is None or self._fast is not None or self.scene_cost() < self.fast_interaction_cost():
             return
         ren = self.plotter.renderer
         hidden = [a for obj in self._objects.values() for a in (obj["edges"] + (obj["actors"] if obj.get("category") == "mesh" else []))
