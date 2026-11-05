@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "meshdraw"
+version = "0.1.0"
+description = "One 3D drawer (CAD look, section planes, per-object display, measure) for antenna_feeds, UmbraAntennaDesigner and mastmodeler"
+requires-python = ">=3.10"
+dependencies = ["numpy>=1.20"]
+
+[project.optional-dependencies]
+qt = ["PyQt6>=6.5", "pyvista>=0.43", "pyvistaqt>=0.11"]
+render = ["pyvista>=0.43"]
+dev = ["pytest>=7", "PyQt6>=6.5", "pyvista>=0.43", "pyvistaqt>=0.11"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
